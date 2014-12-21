@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Random Sentinels</string>
+    <string name="title_activity_setup">Set Up Your Game</string>
+    <string name="set_num_players">Number of heroes:</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
