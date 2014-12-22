@@ -1,14 +1,19 @@
 package net.aehdev.randomsentinels;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 
 public class SetupActivity extends ActionBarActivity {
+
+    public static final String EXTRA_NUM_HEROES = "net.aehdev.randomsentinels.NUM_HEROES";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,20 @@ public class SetupActivity extends ActionBarActivity {
         nHeroesSpinnerAdapter.setDropDownViewResource(android.R.layout
                                                               .simple_spinner_dropdown_item);
         nHeroesSpinner.setAdapter(nHeroesSpinnerAdapter);
+
+        /* Set up button */
+        Button goButton = (Button) findViewById(R.id.button_randomize);
+        goButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Spinner nHeroesSpinner = (Spinner) findViewById(R.id.spinner_num_players);
+                String selection = (String) nHeroesSpinner.getSelectedItem();
+                int nHeroes = Integer.parseInt(selection);
+                Intent intent = new Intent(SetupActivity.this, ResultActivity.class);
+                intent.putExtra(EXTRA_NUM_HEROES, nHeroes);
+                startActivity(intent);
+            }
+        });
     }
 
 
