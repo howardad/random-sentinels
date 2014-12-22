@@ -20,6 +20,9 @@ public class SetupActivity extends ActionBarActivity {
         ArrayAdapter<CharSequence> nHeroesSpinnerAdapter =
                 ArrayAdapter.createFromResource(this, R.array.array_num_heroes,
                                                 android.R.layout.simple_spinner_item);
+        nHeroesSpinnerAdapter.setDropDownViewResource(android.R.layout
+                                                              .simple_spinner_dropdown_item);
+        nHeroesSpinner.setAdapter(nHeroesSpinnerAdapter);
     }
 
 
