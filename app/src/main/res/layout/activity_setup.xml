@@ -13,15 +13,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/label_num_heroes"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:labelFor="@+id/spinner_num_players"/>
 
     <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner_num_players"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_toEndOf="@id/label_num_heroes"
             android:layout_toRightOf="@id/label_num_heroes"
             android:layout_alignBottom="@+id/label_num_heroes"
-            android:spinnerMode="dropdown"/>
+            android:spinnerMode="dropdown"
+            />
 
 </RelativeLayout>
