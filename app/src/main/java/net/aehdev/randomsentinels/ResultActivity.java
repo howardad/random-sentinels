@@ -37,6 +37,7 @@ public class ResultActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         int nHeroes = intent.getIntExtra(SetupActivity.EXTRA_NUM_HEROES, 3);
+        mHeroes = new String[nHeroes];
         setContentView(R.layout.activity_result);
     }
 
