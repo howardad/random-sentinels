@@ -25,22 +25,40 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.aehdev.randomsentinels.data.SentinelsDataSource;
+
 
 public class ResultActivity extends ActionBarActivity {
 
     private String[] mHeroes;
     private String mVillain;
     private String mEnvironment;
+    private SentinelsDataSource mDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        int nHeroes = intent.getIntExtra(SetupActivity.EXTRA_NUM_HEROES, 3);
-        mHeroes = new String[nHeroes];
         setContentView(R.layout.activity_result);
+
+        mDataSource = new SentinelsDataSource(this);
+        mDataSource.open();
+
+        Intent intent = getIntent();
+        int numHeroes = intent.getIntExtra(SetupActivity.EXTRA_NUM_HEROES, 3);
+        mHeroes = new String[numHeroes];
     }
 
+    @Override
+    protected void onResume() {
+        mDataSource.open();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        mDataSource.close();
+        super.onPause();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
