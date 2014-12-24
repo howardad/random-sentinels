@@ -19,9 +19,17 @@
   -->
 
 <resources>
-    <string-array name="num_heroes">
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+    <string-array name="expansions_values">
+        <item>base</item>
+        <item>rook</item>
+        <item>relics</item>
+        <item>timelines</item>
+        <item>vengeance</item>
+        <item>unity</item>
+        <item>ambuscade</item>
+        <item>miss_info</item>
+        <item>scholar</item>
+        <item>gulch</item>
+        <item>wasteland</item>
     </string-array>
 </resources>

@@ -21,6 +21,7 @@ package net.aehdev.randomsentinels;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,10 +40,12 @@ public class SetupActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
         /* Set up spinner for choosing number of heroes */
         Spinner nHeroesSpinner = (Spinner) findViewById(R.id.spinner_num_players);
         ArrayAdapter<CharSequence> nHeroesSpinnerAdapter =
-                ArrayAdapter.createFromResource(this, R.array.array_num_heroes,
+                ArrayAdapter.createFromResource(this, R.array.num_heroes,
                                                 android.R.layout.simple_spinner_item);
         nHeroesSpinnerAdapter.setDropDownViewResource(android.R.layout
                                                               .simple_spinner_dropdown_item);
@@ -80,6 +83,8 @@ public class SetupActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 

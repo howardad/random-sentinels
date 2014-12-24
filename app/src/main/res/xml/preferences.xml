@@ -18,10 +18,14 @@
   ~ along with Random Sentinels. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-    <string-array name="num_heroes">
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-    </string-array>
-</resources>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <MultiSelectListPreference
+            android:key="@string/pref_expansions_key"
+            android:title="@string/pref_expansions_label"
+            android:dialogTitle="@string/pref_expansions_label"
+            android:entries="@array/expansions_entries"
+            android:entryValues="@array/expansions_values"
+            android:defaultValue="@array/expansions_values"/>
+
+</PreferenceScreen>

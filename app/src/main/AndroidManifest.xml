@@ -16,18 +16,16 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with Random Sentinels. If not, see <http://www.gnu.org/licenses/>.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.aehdev.randomsentinels">
 
     <application
             android:allowBackup="true"
             android:icon="@drawable/ic_launcher"
-            android:theme="@style/AppTheme"
-            android:label="@string/app_name">
-        <activity
-                android:name=".SetupActivity">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+        <activity android:name=".SetupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -40,6 +38,10 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="net.aehdev.randomsentinels.SetupActivity"/>
+        </activity>
+        <activity
+                android:name=".SettingsActivity"
+                android:label="@string/title_activity_settings">
         </activity>
     </application>
 

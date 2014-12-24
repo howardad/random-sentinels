@@ -16,8 +16,7 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with Random Sentinels. If not, see <http://www.gnu.org/licenses/>.
-  -->
-
+-->
 <resources>
 
     <string name="app_name">Random Sentinels</string>
@@ -27,5 +26,8 @@
     <string name="button_randomize">Gimme some Sentinels!</string>
     <string name="title_activity_result">Random Sentinels</string>
     <string name="hello_world">Hello world!</string>
+    <string name="pref_expansions_key">pref_expansions</string>
+    <string name="pref_expansions_label">Expansions</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
 </resources>

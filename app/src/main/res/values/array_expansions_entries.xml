@@ -19,9 +19,17 @@
   -->
 
 <resources>
-    <string-array name="num_heroes">
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+    <string-array name="expansions_entries">
+        <item>Base set (Enhanced Edition)</item>
+        <item>Rook City</item>
+        <item>Infernal Relics</item>
+        <item>Shattered Timelines</item>
+        <item>Vengeance</item>
+        <item>Unity mini-expansion</item>
+        <item>Ambuscade mini-expansion</item>
+        <item>Miss Information mini-expansion</item>
+        <item>The Scholar mini-expansion</item>
+        <item>Silver Gulch mini-expansion</item>
+        <item>The Final Wasteland mini-expansion</item>
     </string-array>
 </resources>
