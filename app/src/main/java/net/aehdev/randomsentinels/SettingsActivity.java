@@ -26,6 +26,8 @@ import android.preference.PreferenceFragment;
 
 public class SettingsActivity extends Activity {
 
+    public static final String KEY_PREF_EXPANSIONS = "pref_expansions";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

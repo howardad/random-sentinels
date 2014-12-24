@@ -20,20 +20,35 @@
 package net.aehdev.randomsentinels;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import net.aehdev.randomsentinels.data.SentinelsDataSource;
+import net.aehdev.randomsentinels.model.Environment;
+import net.aehdev.randomsentinels.model.Hero;
+import net.aehdev.randomsentinels.model.Villain;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 
 public class ResultActivity extends ActionBarActivity {
 
-    private String[] mHeroes;
-    private String mVillain;
-    private String mEnvironment;
+    private Set<Hero> mHeroes;
+    private int numHeroes;
+    private Villain mVillain;
+    private Environment mEnvironment;
     private SentinelsDataSource mDataSource;
+    private String[] expansions;
+
+    private static Random sRandom = new Random();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +58,35 @@ public class ResultActivity extends ActionBarActivity {
         mDataSource = new SentinelsDataSource(this);
         mDataSource.open();
 
+        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Set<String> expansionsSet = mPreferences.getStringSet(SettingsActivity.KEY_PREF_EXPANSIONS,
+                                                              new HashSet<String>());
+        expansions = expansionsSet.toArray(new String[expansionsSet.size()]);
+
         Intent intent = getIntent();
-        int numHeroes = intent.getIntExtra(SetupActivity.EXTRA_NUM_HEROES, 3);
-        mHeroes = new String[numHeroes];
+        numHeroes = intent.getIntExtra(SetupActivity.EXTRA_NUM_HEROES, 3);
+
+        pickHeroes();
+        pickVillain();
+        pickEnvironment();
+    }
+
+    private void pickHeroes() {
+        mHeroes = new HashSet<>();
+        List<Hero> heroes = mDataSource.getHeroesByExpansion(expansions);
+        while (mHeroes.size() < numHeroes) {
+            mHeroes.add(heroes.get(sRandom.nextInt(heroes.size())));
+        }
+    }
+
+    private void pickVillain() {
+        List<Villain> villains = mDataSource.getVillainsByExpansion(expansions);
+        mVillain = villains.get(sRandom.nextInt(villains.size()));
+    }
+
+    private void pickEnvironment() {
+        List<Environment> environments = mDataSource.getEnvironmentsByExpansion(expansions);
+        mEnvironment = environments.get(sRandom.nextInt(environments.size()));
     }
 
     @Override

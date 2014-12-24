@@ -58,7 +58,7 @@ public class SentinelsDataSource {
     public List<Hero> getHeroesByExpansion(String[] expansions) {
         List<Hero> heroes = new ArrayList<>();
 
-        // something like SELECT * FROM heroes WHERE expansion IN (expansions) SORT BY expansion
+        // something like SELECT * FROM heroes WHERE expansion IN (expansions) ORDER BY expansion
         Cursor cursor = database.query(HeroTable.TABLE_HEROES, allHeroColumns,
                                        "expansion IN (" + makePlaceholders(expansions.length) + ")",
                                        expansions, null, null, "expansion");
