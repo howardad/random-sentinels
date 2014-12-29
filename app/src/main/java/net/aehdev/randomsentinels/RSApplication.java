@@ -17,32 +17,25 @@
  * along with Random Sentinels. If not, see <http://www.gnu.org/licenses/>.
  */
 
-apply plugin: 'com.android.application'
+package net.aehdev.randomsentinels;
 
-android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+import android.app.Application;
+import android.content.Context;
 
-    defaultConfig {
-        applicationId "net.aehdev.randomsentinels"
-        minSdkVersion 11
-        targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+public class RSApplication extends Application {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        CalligraphyConfig.initDefault(R.attr.fontPath);
     }
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(new CalligraphyContextWrapper(base));
+
     }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.android.support:cardview-v7:21.0.3'
-
-    compile 'uk.co.chrisjenx:calligraphy:1.2.0'
 }
