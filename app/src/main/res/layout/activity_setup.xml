@@ -46,7 +46,8 @@
             android:layout_toEndOf="@id/label_num_heroes"
             android:layout_alignBottom="@+id/label_num_heroes"
             android:spinnerMode="dropdown"
-            android:layout_alignBaseline="@+id/label_num_heroes"/>
+            android:layout_alignBaseline="@+id/label_num_heroes"
+            android:dropDownWidth="@dimen/dropdown_width"/>
 
     <Button
             android:id="@+id/button_randomize"

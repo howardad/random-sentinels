@@ -17,19 +17,60 @@
   ~ along with Random Sentinels. If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              tools:context="net.aehdev.randomsentinels.ResultActivity">
+
+    <android.support.v7.widget.CardView
+            android:id="@+id/hero_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            card_view:cardCornerRadius="0dp"
+            card_view:contentPadding="@dimen/card_content_padding"
+            android:layout_gravity="center">
+
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="net.aehdev.randomsentinels.ResultActivity">
+                android:orientation="vertical"
+                >
 
-    <TextView
-            android:text="@string/hello_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <TextView
+                    style="@style/ResultHeader"
+                    android:text="@string/heroes"/>
 
-</RelativeLayout>
+            <View style="@style/Divider"/>
+
+            <TextView
+                    style="@style/ResultItem"
+                    android:text="Legacy"/>
+
+            <TextView
+                    style="@style/ResultItem"
+                    android:text="Tachyon"/>
+
+            <TextView
+                    style="@style/ResultItem"
+                    android:text="Bunker"/>
+
+            <TextView
+                    style="@style/ResultItem"
+                    android:text="Wraith"/>
+
+            <TextView
+                    style="@style/ResultItem"
+                    android:text="Tempest"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

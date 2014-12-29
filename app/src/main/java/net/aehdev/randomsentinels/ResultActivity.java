@@ -66,9 +66,9 @@ public class ResultActivity extends ActionBarActivity {
         Intent intent = getIntent();
         numHeroes = intent.getIntExtra(SetupActivity.EXTRA_NUM_HEROES, 3);
 
-        pickHeroes();
-        pickVillain();
-        pickEnvironment();
+//        pickHeroes();
+//        pickVillain();
+//        pickEnvironment();
     }
 
     private void pickHeroes() {

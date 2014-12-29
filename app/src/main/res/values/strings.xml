@@ -25,9 +25,11 @@
     <string name="action_settings">Settings</string>
     <string name="button_randomize">Gimme some Sentinels!</string>
     <string name="title_activity_result">Random Sentinels</string>
-    <string name="hello_world">Hello world!</string>
     <string name="pref_expansions_key">pref_expansions</string>
     <string name="pref_expansions_label">Expansions</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="heroes">Heroes</string>
+    <string name="villain">Villain</string>
+    <string name="environment">Environment</string>
 
 </resources>
