@@ -19,6 +19,11 @@
 
 apply plugin: 'com.android.application'
 
+def versionMajor = 0
+def versionMinor = 1
+def versionPatch = 0
+def versionBuild = 0
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -27,8 +32,8 @@ android {
         applicationId "net.aehdev.randomsentinels"
         minSdkVersion 11
         targetSdkVersion 21
-        versionCode 1
-        versionName "1.0"
+        versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
     buildTypes {
         release {
