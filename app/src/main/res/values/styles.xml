@@ -31,6 +31,13 @@
         <item name="android:textColorSecondaryInverse">@color/primary_light</item>
     </style>
 
+    <!-- Result CardViews -->
+    <style name="ResultCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
     <!-- Result section headers -->
     <style name="ResultHeader">
         <item name="android:layout_width">match_parent</item>
@@ -40,14 +47,26 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- Result items -->
     <style name="ResultItem">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/primary_dark</item>
         <item name="fontPath">fonts/Bangers.ttf</item>
         <item name="android:textSize">16sp</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="ResultItem.Hero" parent="ResultItem">
+        <item name="android:textColor">@color/primary_dark</item>
+    </style>
+
+    <style name="ResultItem.Villain" parent="ResultItem">
+        <item name="android:textColor">@color/accent</item>
+    </style>
+
+    <style name="ResultItem.Environment" parent="ResultItem">
+        <item name="android:textColor">@color/primary_text</item>
     </style>
 
     <style name="Divider">
