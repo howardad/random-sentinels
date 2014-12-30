@@ -20,10 +20,8 @@
 package net.aehdev.randomsentinels;
 
 import android.app.Application;
-import android.content.Context;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class RSApplication extends Application {
 
@@ -33,9 +31,5 @@ public class RSApplication extends Application {
         CalligraphyConfig.initDefault(R.attr.fontPath);
     }
 
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(new CalligraphyContextWrapper(base));
 
-    }
 }

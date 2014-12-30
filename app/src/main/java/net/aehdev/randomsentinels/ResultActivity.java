@@ -19,6 +19,7 @@
 
 package net.aehdev.randomsentinels;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class ResultActivity extends ActionBarActivity {
@@ -69,6 +72,11 @@ public class ResultActivity extends ActionBarActivity {
 //        pickHeroes();
 //        pickVillain();
 //        pickEnvironment();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(new CalligraphyContextWrapper(base));
     }
 
     private void pickHeroes() {
