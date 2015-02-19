@@ -20,30 +20,23 @@
 package net.aehdev.randomsentinels.data;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 
-public class SentinelsDatabaseHelper extends SQLiteOpenHelper {
+public class SentinelsDatabaseHelper extends SQLiteAssetHelper {
 
-    private static final String DATABASE_NAME = "sentinels.db";
+    private static final String DATABASE_NAME = "rsdata.db.gz";
     private static final int DATABASE_VERSION = 1;
 
     public SentinelsDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase database) {
-        HeroTable.onCreate(database);
-        VillainTable.onCreate(database);
-        EnvironmentTable.onCreate(database);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-        HeroTable.onUpgrade(database, oldVersion, newVersion);
-        VillainTable.onUpgrade(database, oldVersion, newVersion);
-        EnvironmentTable.onUpgrade(database, oldVersion, newVersion);
-    }
+//    @Override
+//    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+//        HeroTable.onUpgrade(database, oldVersion, newVersion);
+//        VillainTable.onUpgrade(database, oldVersion, newVersion);
+//        EnvironmentTable.onUpgrade(database, oldVersion, newVersion);
+//    }
 }

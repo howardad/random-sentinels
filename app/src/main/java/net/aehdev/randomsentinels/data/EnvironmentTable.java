@@ -19,9 +19,6 @@
 
 package net.aehdev.randomsentinels.data;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 public class EnvironmentTable {
 
     // Table description
@@ -31,24 +28,24 @@ public class EnvironmentTable {
     public static final String COLUMN_EXPANSION = "expansion";
 
     // Table creation statement
-    public static final String DATABASE_CREATE = "create table "
-                                                 + TABLE_ENVIRONMENTS
-                                                 + "("
-                                                 + COLUMN_ID +
-                                                 " integer primary key autoincrement, "
-                                                 + COLUMN_NAME + " text not null, "
-                                                 + COLUMN_EXPANSION + " text not null"
-                                                 + ");";
-
-    public static void onCreate(SQLiteDatabase database) {
-        database.execSQL(DATABASE_CREATE);
-    }
-
-    public static void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-        Log.w(EnvironmentTable.class.getName(),
-              "Upgrading database from version " + oldVersion + " to " + newVersion +
-              ", which will destroy all old data");
-        database.execSQL("DROP TABLE IF EXISTS " + TABLE_ENVIRONMENTS);
-        onCreate(database);
-    }
+//    public static final String DATABASE_CREATE = "create table "
+//                                                 + TABLE_ENVIRONMENTS
+//                                                 + "("
+//                                                 + COLUMN_ID +
+//                                                 " integer primary key autoincrement, "
+//                                                 + COLUMN_NAME + " text not null, "
+//                                                 + COLUMN_EXPANSION + " text not null"
+//                                                 + ");";
+//
+//    public static void onCreate(SQLiteDatabase database) {
+//        database.execSQL(DATABASE_CREATE);
+//    }
+//
+//    public static void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
+//        Log.w(EnvironmentTable.class.getName(),
+//              "Upgrading database from version " + oldVersion + " to " + newVersion +
+//              ", which will destroy all old data");
+//        database.execSQL("DROP TABLE IF EXISTS " + TABLE_ENVIRONMENTS);
+//        onCreate(database);
+//    }
 }
