@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import net.aehdev.randomsentinels.data.SentinelsDataSource;
 import net.aehdev.randomsentinels.model.Environment;
 import net.aehdev.randomsentinels.model.Hero;
+import net.aehdev.randomsentinels.model.VengefulFive;
 import net.aehdev.randomsentinels.model.Villain;
 
 import java.util.HashSet;
@@ -46,6 +47,7 @@ public class ResultActivity extends ActionBarActivity {
     private Set<Hero> mHeroes;
     private int numHeroes;
     private Villain mVillain;
+    private Set<Villain> mVengefulFive;
     private Environment mEnvironment;
     private SentinelsDataSource mDataSource;
     private String[] expansions;
@@ -69,9 +71,9 @@ public class ResultActivity extends ActionBarActivity {
         Intent intent = getIntent();
         numHeroes = intent.getIntExtra(SetupActivity.EXTRA_NUM_HEROES, 3);
 
-//        pickHeroes();
-//        pickVillain();
-//        pickEnvironment();
+        pickHeroes();
+        pickVillain();
+        pickEnvironment();
     }
 
     @Override
@@ -90,6 +92,11 @@ public class ResultActivity extends ActionBarActivity {
     private void pickVillain() {
         List<Villain> villains = mDataSource.getVillainsByExpansion(expansions);
         mVillain = villains.get(sRandom.nextInt(villains.size()));
+
+        /* The Vengeful Five from the Vengeance expansion are weird and require special handling */
+        if (mVillain.getId() == VengefulFive.ID) {
+            mVillain = new VengefulFive(numHeroes);
+        }
     }
 
     private void pickEnvironment() {
