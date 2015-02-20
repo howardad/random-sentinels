@@ -19,47 +19,9 @@
 
 package net.aehdev.randomsentinels.model;
 
-public class Environment {
-
-    private long id;
-    private String name;
-    private String expansion;
-
-    public Environment() {
-    }
+public class Environment extends GameElement {
 
     public Environment(long id, String name, String expansion) {
-        this.id = id;
-        this.name = name;
-        this.expansion = expansion;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getExpansion() {
-        return expansion;
-    }
-
-    public void setExpansion(String expansion) {
-        this.expansion = expansion;
-    }
-
-    @Override
-    public String toString() {
-        return name;
+        super(id, name, expansion);
     }
 }

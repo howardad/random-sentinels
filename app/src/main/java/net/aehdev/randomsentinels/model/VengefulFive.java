@@ -39,11 +39,6 @@ public class VengefulFive extends Villain {
 
     private Set<Villain> vengefulOnes;
 
-    public VengefulFive() {
-        super();
-        vengefulOnes = new HashSet<>();
-    }
-
     public VengefulFive(int numHeroes) {
         super(ID, "Vengeful Five", 3, "vengeance");
         Random random = new Random();

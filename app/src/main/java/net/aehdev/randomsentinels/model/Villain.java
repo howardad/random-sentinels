@@ -19,37 +19,13 @@
 
 package net.aehdev.randomsentinels.model;
 
-public class Villain {
+public class Villain extends GameElement {
 
-    private long id;
-    private String name;
     private int difficulty;
-    private String expansion;
-
-    public Villain() {
-    }
 
     public Villain(long id, String name, int difficulty, String expansion) {
-        this.id = id;
-        this.name = name;
+        super(id, name, expansion);
         this.difficulty = difficulty;
-        this.expansion = expansion;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getDifficulty() {
@@ -58,18 +34,5 @@ public class Villain {
 
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
-    }
-
-    public String getExpansion() {
-        return expansion;
-    }
-
-    public void setExpansion(String expansion) {
-        this.expansion = expansion;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }

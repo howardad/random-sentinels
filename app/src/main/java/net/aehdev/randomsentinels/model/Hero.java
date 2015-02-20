@@ -19,18 +19,9 @@
 
 package net.aehdev.randomsentinels.model;
 
-public class Hero {
+public class Hero extends GameElement {
 
-    private long id;
-    private String name;
     private int complexity;
-    private String expansion;
-
-    /**
-     * Default constructor (mostly for the framework's use).
-     */
-    public Hero() {
-    }
 
     /**
      * Constructor to set all fields.
@@ -41,26 +32,8 @@ public class Hero {
      * @param expansion  The expansion set in which the hero's deck is found
      */
     public Hero(long id, String name, int complexity, String expansion) {
-        this.id = id;
-        this.name = name;
+        super(id, name, expansion);
         this.complexity = complexity;
-        this.expansion = expansion;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getComplexity() {
@@ -69,18 +42,5 @@ public class Hero {
 
     public void setComplexity(int complexity) {
         this.complexity = complexity;
-    }
-
-    public String getExpansion() {
-        return expansion;
-    }
-
-    public void setExpansion(String expansion) {
-        this.expansion = expansion;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
