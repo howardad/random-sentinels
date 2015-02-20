@@ -148,7 +148,7 @@ public class ResultActivity extends ActionBarActivity {
             type = params[0];
             switch (type) {
                 case HERO:
-                    Set<Hero> mHeroes = new HashSet<>();
+                    mHeroes = new HashSet<>();
                     List<Hero> allHeroes = mDataSource.getHeroesByExpansion(expansions);
                     while (mHeroes.size() < numHeroes) {
                         mHeroes.add(allHeroes.get(sRandom.nextInt(allHeroes.size())));
