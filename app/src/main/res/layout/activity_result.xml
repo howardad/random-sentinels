@@ -68,11 +68,13 @@
                 <TextView
                         style="@style/ResultItem.Hero"
                         android:id="@+id/result_hero_4"
+                        android:visibility="gone"
                         android:text="Wraith"/>
 
                 <TextView
                         style="@style/ResultItem.Hero"
                         android:id="@+id/result_hero_5"
+                        android:visibility="gone"
                         android:text="Tempest"/>
 
             </LinearLayout>
@@ -100,6 +102,31 @@
                         style="@style/ResultItem.Villain"
                         android:id="@+id/result_villain"
                         android:text="Miss Information"/>
+
+                <TextView
+                        style="@style/ResultItem.Villain"
+                        android:id="@+id/result_vengeful_1"
+                        android:visibility="gone"/>
+
+                <TextView
+                        style="@style/ResultItem.Villain"
+                        android:id="@+id/result_vengeful_2"
+                        android:visibility="gone"/>
+
+                <TextView
+                        style="@style/ResultItem.Villain"
+                        android:id="@+id/result_vengeful_3"
+                        android:visibility="gone"/>
+
+                <TextView
+                        style="@style/ResultItem.Villain"
+                        android:id="@+id/result_vengeful_4"
+                        android:visibility="gone"/>
+
+                <TextView
+                        style="@style/ResultItem.Villain"
+                        android:id="@+id/result_vengeful_5"
+                        android:visibility="gone"/>
 
             </LinearLayout>
 

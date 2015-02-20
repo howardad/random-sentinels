@@ -22,18 +22,23 @@ package net.aehdev.randomsentinels;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import net.aehdev.randomsentinels.data.SentinelsDataSource;
 import net.aehdev.randomsentinels.model.Environment;
+import net.aehdev.randomsentinels.model.GameElement;
 import net.aehdev.randomsentinels.model.Hero;
 import net.aehdev.randomsentinels.model.VengefulFive;
 import net.aehdev.randomsentinels.model.Villain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -82,26 +87,15 @@ public class ResultActivity extends ActionBarActivity {
     }
 
     private void pickHeroes() {
-        mHeroes = new HashSet<>();
-        List<Hero> heroes = mDataSource.getHeroesByExpansion(expansions);
-        while (mHeroes.size() < numHeroes) {
-            mHeroes.add(heroes.get(sRandom.nextInt(heroes.size())));
-        }
+        new QueryDatabaseTask().execute(ElementType.HERO);
     }
 
     private void pickVillain() {
-        List<Villain> villains = mDataSource.getVillainsByExpansion(expansions);
-        mVillain = villains.get(sRandom.nextInt(villains.size()));
-
-        /* The Vengeful Five from the Vengeance expansion are weird and require special handling */
-        if (mVillain.getId() == VengefulFive.ID) {
-            mVillain = new VengefulFive(numHeroes);
-        }
+        new QueryDatabaseTask().execute(ElementType.VILLAIN);
     }
 
     private void pickEnvironment() {
-        List<Environment> environments = mDataSource.getEnvironmentsByExpansion(expansions);
-        mEnvironment = environments.get(sRandom.nextInt(environments.size()));
+        new QueryDatabaseTask().execute(ElementType.ENVIRONMENT);
     }
 
     @Override
@@ -138,5 +132,109 @@ public class ResultActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private enum ElementType {
+        HERO, VILLAIN, ENVIRONMENT
+    }
+
+    private class QueryDatabaseTask extends AsyncTask<ElementType, Void,
+                                                             List<? extends GameElement>> {
+
+        private ElementType type;
+
+        @Override
+        protected List<? extends GameElement> doInBackground(ElementType... params) {
+            type = params[0];
+            switch (type) {
+                case HERO:
+                    Set<Hero> mHeroes = new HashSet<>();
+                    List<Hero> allHeroes = mDataSource.getHeroesByExpansion(expansions);
+                    while (mHeroes.size() < numHeroes) {
+                        mHeroes.add(allHeroes.get(sRandom.nextInt(allHeroes.size())));
+                    }
+                    return new ArrayList<>(mHeroes);
+                case VILLAIN:
+                    List<Villain> resultVillain = new ArrayList<>();
+                    List<Villain> villains = mDataSource.getVillainsByExpansion(expansions);
+                    mVillain = villains.get(sRandom.nextInt(villains.size()));
+
+                    /* The Vengeful Five are weird and require special handling */
+                    if (mVillain.getId() == VengefulFive.ID) {
+                        mVillain = new VengefulFive(numHeroes);
+                    }
+
+                    resultVillain.add(mVillain);
+                    return resultVillain;
+                case ENVIRONMENT:
+                    List<Environment> resultEnv = new ArrayList<>();
+                    List<Environment> environments =
+                            mDataSource.getEnvironmentsByExpansion(expansions);
+                    mEnvironment = environments.get(sRandom.nextInt(environments.size()));
+                    resultEnv.add(mEnvironment);
+                    return resultEnv;
+                default:     // something has gone terribly wrong
+                    return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<? extends GameElement> result) {
+            switch (type) {
+                case HERO:
+                    TextView hero1, hero2, hero3, hero4, hero5;
+                    hero1 = (TextView) findViewById(R.id.result_hero_1);
+                    hero1.setText(result.get(0).toString());
+                    hero2 = (TextView) findViewById(R.id.result_hero_2);
+                    hero2.setText(result.get(1).toString());
+                    hero3 = (TextView) findViewById(R.id.result_hero_3);
+                    hero3.setText(result.get(2).toString());
+                    if (numHeroes > 3) {
+                        hero4 = (TextView) findViewById(R.id.result_hero_4);
+                        hero4.setText(result.get(3).toString());
+                        hero4.setVisibility(View.VISIBLE);
+                    }
+                    if (numHeroes > 4) {
+                        hero5 = (TextView) findViewById(R.id.result_hero_5);
+                        hero5.setText(result.get(4).toString());
+                        hero5.setVisibility(View.VISIBLE);
+                    }
+                    break;
+                case VILLAIN:
+                    if (result.get(0).getId() != VengefulFive.ID) {
+                        TextView villainView = (TextView) findViewById(R.id.result_villain);
+                        villainView.setText(result.get(0).toString());
+                    } else {
+                        TextView vengeful1, vengeful2, vengeful3, vengeful4, vengeful5;
+                        List<Villain> vengeful =
+                                new ArrayList<>(((VengefulFive) result.get(0)).getVengefulOnes());
+                        vengeful1 = (TextView) findViewById(R.id.result_vengeful_1);
+                        vengeful1.setText(vengeful.get(0).toString());
+                        vengeful1.setVisibility(View.VISIBLE);
+                        vengeful2 = (TextView) findViewById(R.id.result_vengeful_2);
+                        vengeful2.setText(vengeful.get(1).toString());
+                        vengeful2.setVisibility(View.VISIBLE);
+                        vengeful3 = (TextView) findViewById(R.id.result_vengeful_3);
+                        vengeful3.setText(vengeful.get(2).toString());
+                        vengeful3.setVisibility(View.VISIBLE);
+                        if (numHeroes > 3) {
+                            vengeful4 = (TextView) findViewById(R.id.result_vengeful_4);
+                            vengeful4.setText(vengeful.get(3).toString());
+                            vengeful4.setVisibility(View.VISIBLE);
+                        }
+                        if (numHeroes > 4) {
+                            vengeful5 = (TextView) findViewById(R.id.result_vengeful_5);
+                            vengeful5.setText(vengeful.get(4).toString());
+                            vengeful5.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case ENVIRONMENT:
+                    TextView envView = (TextView) findViewById(R.id.result_environment);
+                    envView.setText(result.get(0).toString());
+                    break;
+                default:
+            }
+        }
     }
 }
