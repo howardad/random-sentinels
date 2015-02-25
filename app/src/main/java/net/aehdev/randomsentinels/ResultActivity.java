@@ -158,11 +158,12 @@ public class ResultActivity extends ActionBarActivity {
                     List<Villain> resultVillain = new ArrayList<>();
 //                    List<Villain> villains = mDataSource.getVillainsByExpansion(expansions);
 //                    mVillain = villains.get(sRandom.nextInt(villains.size()));
-//
-//                    /* The Vengeful Five are weird and require special handling */
-//                    if (mVillain.getId() == VengefulFive.ID) {
+
+                    mVillain = new Villain(19, "Vengeful Five", 3, "vengeance");
+                    /* The Vengeful Five are weird and require special handling */
+                    if (mVillain.getId() == VengefulFive.ID) {
                         mVillain = new VengefulFive(numHeroes);
-//                    }
+                    }
 
                     resultVillain.add(mVillain);
                     return resultVillain;
