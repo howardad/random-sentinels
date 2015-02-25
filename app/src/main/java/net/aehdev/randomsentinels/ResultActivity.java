@@ -205,7 +205,10 @@ public class ResultActivity extends ActionBarActivity {
                         TextView villainView = (TextView) findViewById(R.id.result_villain);
                         villainView.setText(result.get(0).toString());
                     } else {
-                        TextView vengeful1, vengeful2, vengeful3, vengeful4, vengeful5;
+                        TextView wrongVillain, vengeful1, vengeful2, vengeful3, vengeful4,
+                                vengeful5;
+                        wrongVillain = (TextView) findViewById(R.id.result_villain);
+                        wrongVillain.setVisibility(View.GONE);
                         List<Villain> vengeful =
                                 new ArrayList<>(((VengefulFive) result.get(0)).getVengefulOnes());
                         vengeful1 = (TextView) findViewById(R.id.result_vengeful_1);
