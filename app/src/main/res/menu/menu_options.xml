@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2014 Adam Howard <aeh AT aehdev DOT net>.
+  ~ Copyright (c) 2015 Adam Howard <aeh AT aehdev DOT net>.
   ~
   ~ This file is part of Random Sentinels.
   ~
@@ -20,7 +20,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="net.aehdev.randomsentinels.SetupActivity">
+      tools:context="net.aehdev.randomsentinels.OptionsMenuActivity">
     <item
             android:id="@+id/action_settings"
             android:title="@string/action_settings"

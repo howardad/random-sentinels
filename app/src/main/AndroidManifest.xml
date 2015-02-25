@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2014 Adam Howard <aeh AT aehdev DOT net>.
+  ~ Copyright (c) 2015 Adam Howard <aeh AT aehdev DOT net>.
   ~
   ~ This file is part of Random Sentinels.
   ~
@@ -16,7 +16,7 @@
   ~
   ~ You should have received a copy of the GNU General Public License
   ~ along with Random Sentinels. If not, see <http://www.gnu.org/licenses/>.
--->
+  -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.aehdev.randomsentinels">
 
@@ -43,6 +43,14 @@
         <activity
                 android:name=".SettingsActivity"
                 android:label="@string/title_activity_settings">
+        </activity>
+        <activity
+                android:name=".AboutActivity"
+                android:label="@string/title_activity_about">
+        </activity>
+        <activity
+                android:name=".OptionsMenuActivity"
+                android:label="@string/title_activity_options_menu">
         </activity>
     </application>
 
