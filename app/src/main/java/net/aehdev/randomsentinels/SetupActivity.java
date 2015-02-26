@@ -22,44 +22,44 @@ package net.aehdev.randomsentinels;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class SetupActivity extends OptionsMenuActivity {
 
     public static final String EXTRA_NUM_HEROES = "net.aehdev.randomsentinels.NUM_HEROES";
 
+    @InjectView(R.id.spinner_num_players) Spinner mNumHeroesSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+        ButterKnife.inject(this);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        setupNumHeroesSpinner();
+    }
 
-        /* Set up spinner for choosing number of heroes */
-        Spinner nHeroesSpinner = (Spinner) findViewById(R.id.spinner_num_players);
-        ArrayAdapter<CharSequence> nHeroesSpinnerAdapter =
+    private void setupNumHeroesSpinner() {
+        ArrayAdapter<CharSequence> nHeroesAdapter =
                 ArrayAdapter.createFromResource(this, R.array.num_heroes,
                                                 android.R.layout.simple_spinner_item);
-        nHeroesSpinnerAdapter.setDropDownViewResource(android.R.layout
-                                                              .simple_spinner_dropdown_item);
-        nHeroesSpinner.setAdapter(nHeroesSpinnerAdapter);
+        nHeroesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mNumHeroesSpinner.setAdapter(nHeroesAdapter);
+    }
 
-        /* Set up button */
-        Button goButton = (Button) findViewById(R.id.button_randomize);
-        goButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Spinner nHeroesSpinner = (Spinner) findViewById(R.id.spinner_num_players);
-                String selection = (String) nHeroesSpinner.getSelectedItem();
-                int nHeroes = Integer.parseInt(selection);
-                Intent intent = new Intent(SetupActivity.this, ResultActivity.class);
-                intent.putExtra(EXTRA_NUM_HEROES, nHeroes);
-                startActivity(intent);
-            }
-        });
+    @OnClick(R.id.button_randomize)
+    public void onSentinelsButtonClick() {
+        String selection = (String) mNumHeroesSpinner.getSelectedItem();
+        int numHeroes = Integer.parseInt(selection);
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra(EXTRA_NUM_HEROES, numHeroes);
+        startActivity(intent);
     }
 }
