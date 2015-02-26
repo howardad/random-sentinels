@@ -41,16 +41,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.InjectViews;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class ResultActivity extends OptionsMenuActivity {
 
-    private Set<Hero> mHeroes;
     private int numHeroes;
-    private Villain mVillain;
-    private Set<Villain> mVengefulFive;
-    private Environment mEnvironment;
     private SentinelsDataSource mDataSource;
     private String[] expansions;
 
@@ -65,8 +64,8 @@ public class ResultActivity extends OptionsMenuActivity {
         mDataSource = new SentinelsDataSource(this);
         mDataSource.open();
 
-        SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Set<String> expansionsSet = mPreferences.getStringSet(SettingsActivity.KEY_PREF_EXPANSIONS,
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Set<String> expansionsSet = prefs.getStringSet(SettingsActivity.KEY_PREF_EXPANSIONS,
                                                               new HashSet<String>());
         expansions = expansionsSet.toArray(new String[expansionsSet.size()]);
 
@@ -116,35 +115,51 @@ public class ResultActivity extends OptionsMenuActivity {
 
         private ElementType type;
 
+        @InjectViews({R.id.result_hero_1, R.id.result_hero_2, R.id.result_hero_3,
+                      R.id.result_hero_4, R.id.result_hero_5})
+        TextView[] mHeroes;
+
+        @InjectViews({R.id.result_vengeful_1, R.id.result_vengeful_2, R.id.result_vengeful_3,
+                      R.id.result_vengeful_4, R.id.result_vengeful_5})
+        TextView[] mVengefuls;
+
+        @InjectView(R.id.result_villain) TextView mVillain;
+        @InjectView(R.id.result_environment) TextView mEnvironment;
+
+        public QueryDatabaseTask() {
+            ButterKnife.inject(this, ResultActivity.this);
+        }
+
         @Override
         protected List<? extends GameElement> doInBackground(ElementType... params) {
             type = params[0];
             switch (type) {
                 case HERO:
-                    mHeroes = new HashSet<>();
+                    Set<Hero> heroes = new HashSet<>();
                     List<Hero> allHeroes = mDataSource.getHeroesByExpansion(expansions);
-                    while (mHeroes.size() < numHeroes) {
-                        mHeroes.add(allHeroes.get(sRandom.nextInt(allHeroes.size())));
+                    while (heroes.size() < numHeroes) {
+                        heroes.add(allHeroes.get(sRandom.nextInt(allHeroes.size())));
                     }
-                    return new ArrayList<>(mHeroes);
+                    return new ArrayList<>(heroes);
                 case VILLAIN:
                     List<Villain> resultVillain = new ArrayList<>();
                     List<Villain> villains = mDataSource.getVillainsByExpansion(expansions);
-                    mVillain = villains.get(sRandom.nextInt(villains.size()));
+                    Villain villain = villains.get(sRandom.nextInt(villains.size()));
 
                     /* The Vengeful Five are weird and require special handling */
-                    if (mVillain.getId() == VengefulFive.ID) {
-                        mVillain = new VengefulFive(numHeroes);
+                    if (villain.getId() == VengefulFive.ID) {
+                        villain = new VengefulFive(numHeroes);
                     }
 
-                    resultVillain.add(mVillain);
+                    resultVillain.add(villain);
                     return resultVillain;
                 case ENVIRONMENT:
                     List<Environment> resultEnv = new ArrayList<>();
                     List<Environment> environments =
                             mDataSource.getEnvironmentsByExpansion(expansions);
-                    mEnvironment = environments.get(sRandom.nextInt(environments.size()));
-                    resultEnv.add(mEnvironment);
+                    Environment environment =
+                            environments.get(sRandom.nextInt(environments.size()));
+                    resultEnv.add(environment);
                     return resultEnv;
                 default:     // something has gone terribly wrong
                     return null;
@@ -155,59 +170,43 @@ public class ResultActivity extends OptionsMenuActivity {
         protected void onPostExecute(List<? extends GameElement> result) {
             switch (type) {
                 case HERO:
-                    TextView hero1, hero2, hero3, hero4, hero5;
-                    hero1 = (TextView) findViewById(R.id.result_hero_1);
-                    hero1.setText(result.get(0).toString());
-                    hero2 = (TextView) findViewById(R.id.result_hero_2);
-                    hero2.setText(result.get(1).toString());
-                    hero3 = (TextView) findViewById(R.id.result_hero_3);
-                    hero3.setText(result.get(2).toString());
+                    mHeroes[0].setText(result.get(0).toString());
+                    mHeroes[1].setText(result.get(1).toString());
+                    mHeroes[2].setText(result.get(2).toString());
                     if (numHeroes > 3) {
-                        hero4 = (TextView) findViewById(R.id.result_hero_4);
-                        hero4.setText(result.get(3).toString());
-                        hero4.setVisibility(View.VISIBLE);
+                        mHeroes[3].setText(result.get(3).toString());
+                        mHeroes[3].setVisibility(View.VISIBLE);
                     }
                     if (numHeroes > 4) {
-                        hero5 = (TextView) findViewById(R.id.result_hero_5);
-                        hero5.setText(result.get(4).toString());
-                        hero5.setVisibility(View.VISIBLE);
+                        mHeroes[4].setText(result.get(4).toString());
+                        mHeroes[4].setVisibility(View.VISIBLE);
                     }
                     break;
                 case VILLAIN:
                     if (result.get(0).getId() != VengefulFive.ID) {
-                        TextView villainView = (TextView) findViewById(R.id.result_villain);
-                        villainView.setText(result.get(0).toString());
+                        mVillain.setText(result.get(0).toString());
                     } else {
-                        TextView wrongVillain, vengeful1, vengeful2, vengeful3, vengeful4,
-                                vengeful5;
-                        wrongVillain = (TextView) findViewById(R.id.result_villain);
-                        wrongVillain.setVisibility(View.GONE);
+                        mVillain.setVisibility(View.GONE);
                         List<Villain> vengeful =
                                 new ArrayList<>(((VengefulFive) result.get(0)).getVengefulOnes());
-                        vengeful1 = (TextView) findViewById(R.id.result_vengeful_1);
-                        vengeful1.setText(vengeful.get(0).toString());
-                        vengeful1.setVisibility(View.VISIBLE);
-                        vengeful2 = (TextView) findViewById(R.id.result_vengeful_2);
-                        vengeful2.setText(vengeful.get(1).toString());
-                        vengeful2.setVisibility(View.VISIBLE);
-                        vengeful3 = (TextView) findViewById(R.id.result_vengeful_3);
-                        vengeful3.setText(vengeful.get(2).toString());
-                        vengeful3.setVisibility(View.VISIBLE);
+                        mVengefuls[0].setText(vengeful.get(0).toString());
+                        mVengefuls[0].setVisibility(View.VISIBLE);
+                        mVengefuls[1].setText(vengeful.get(1).toString());
+                        mVengefuls[1].setVisibility(View.VISIBLE);
+                        mVengefuls[2].setText(vengeful.get(2).toString());
+                        mVengefuls[2].setVisibility(View.VISIBLE);
                         if (numHeroes > 3) {
-                            vengeful4 = (TextView) findViewById(R.id.result_vengeful_4);
-                            vengeful4.setText(vengeful.get(3).toString());
-                            vengeful4.setVisibility(View.VISIBLE);
+                            mVengefuls[3].setText(vengeful.get(3).toString());
+                            mVengefuls[3].setVisibility(View.VISIBLE);
                         }
                         if (numHeroes > 4) {
-                            vengeful5 = (TextView) findViewById(R.id.result_vengeful_5);
-                            vengeful5.setText(vengeful.get(4).toString());
-                            vengeful5.setVisibility(View.VISIBLE);
+                            mVengefuls[4].setText(vengeful.get(4).toString());
+                            mVengefuls[4].setVisibility(View.VISIBLE);
                         }
                     }
                     break;
                 case ENVIRONMENT:
-                    TextView envView = (TextView) findViewById(R.id.result_environment);
-                    envView.setText(result.get(0).toString());
+                    mEnvironment.setText(result.get(0).toString());
                     break;
                 default:
             }
