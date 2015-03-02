@@ -110,7 +110,7 @@ public class ResultActivity extends OptionsMenuActivity {
         HERO, VILLAIN, ENVIRONMENT
     }
 
-    private class QueryDatabaseTask extends AsyncTask<ElementType, Void,
+    protected class QueryDatabaseTask extends AsyncTask<ElementType, Void,
                                                              List<? extends GameElement>> {
 
         private ElementType type;

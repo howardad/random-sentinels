@@ -19,24 +19,34 @@
 
 package net.aehdev.randomsentinels;
 
-import android.app.Activity;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
-public class AboutActivity extends Activity {
+
+public class AboutActivity extends ActionBarActivity {
 
     private StringBuilder oflBangers, calligraphy, butterKnife;
+    @InjectView(R.id.about_text) TextView aboutTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
+        ButterKnife.inject(this);
+
+        aboutTextView.setText("Random Sentinels version " + getVersionName());
 
         new Thread(new Runnable() {
             public void run() {
@@ -47,6 +57,15 @@ public class AboutActivity extends Activity {
                 }
             }
         }).start();
+    }
+
+    private String getVersionName() {
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            return packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void parseInfo() throws IOException {
