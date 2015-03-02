@@ -37,5 +37,6 @@
     <string name="about_calligraphy">Calligraphy</string>
     <string name="about_butter_knife">Butter Knife</string>
     <string name="title_activity_options_menu">OptionsMenuActivity</string>
+    <string name="header_oss_licenses">Open Source Licenses</string>
 
 </resources>
