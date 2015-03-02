@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -104,13 +105,28 @@ public class AboutActivity extends ActionBarActivity {
 
     @OnClick({R.id.title_bangers_license, R.id.title_calligraphy_license,
             R.id.title_butter_knife_license})
-    public void expandText(TextView view) {
+    public void toggleText(TextView view) {
         switch (view.getId()) {
             case R.id.title_bangers_license:
+                if (aboutBangers.getVisibility() == View.GONE) {
+                    aboutBangers.setVisibility(View.VISIBLE);
+                } else {
+                    aboutBangers.setVisibility(View.GONE);
+                }
                 break;
             case R.id.title_calligraphy_license:
+                if (aboutCalligraphy.getVisibility() == View.GONE) {
+                    aboutCalligraphy.setVisibility(View.VISIBLE);
+                } else {
+                    aboutCalligraphy.setVisibility(View.GONE);
+                }
                 break;
             case R.id.title_butter_knife_license:
+                if (aboutButterKnife.getVisibility() == View.GONE) {
+                    aboutButterKnife.setVisibility(View.VISIBLE);
+                } else {
+                    aboutButterKnife.setVisibility(View.GONE);
+                }
                 break;
         }
     }
