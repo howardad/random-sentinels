@@ -39,6 +39,9 @@ public class AboutActivity extends ActionBarActivity {
 
     private StringBuilder oflBangers, calligraphy, butterKnife;
     @InjectView(R.id.about_text) TextView aboutTextView;
+    @InjectView(R.id.text_bangers_license) TextView aboutBangers;
+    @InjectView(R.id.text_calligraphy_license) TextView aboutCalligraphy;
+    @InjectView(R.id.text_butter_knife_license) TextView aboutButterKnife;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,10 @@ public class AboutActivity extends ActionBarActivity {
                 }
             }
         }).start();
+
+        aboutBangers.setText(oflBangers);
+        aboutCalligraphy.setText(calligraphy);
+        aboutButterKnife.setText(butterKnife);
     }
 
     private String getVersionName() {

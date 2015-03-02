@@ -77,6 +77,10 @@
                 android:id="@+id/title_butter_knife_license"
                 android:text="@string/about_butter_knife"/>
 
+            <TextView
+                style="@style/LicenseText"
+                android:id="@+id/text_butter_knife_license"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
