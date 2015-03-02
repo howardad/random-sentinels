@@ -32,8 +32,10 @@
     <string name="villain">Villain</string>
     <string name="environment">Environment</string>
     <string name="title_activity_about">About</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="about">About</string>
+    <string name="about_bangers">Bangers font</string>
+    <string name="about_calligraphy">Calligraphy</string>
+    <string name="about_butter_knife">Butter Knife</string>
     <string name="title_activity_options_menu">OptionsMenuActivity</string>
 
 </resources>
