@@ -33,6 +33,7 @@ import java.io.InputStreamReader;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class AboutActivity extends ActionBarActivity {
@@ -98,6 +99,19 @@ public class AboutActivity extends ActionBarActivity {
         butterKnife = new StringBuilder(butterStream.available());
         while ((line = butterReader.readLine()) != null) {
             butterKnife.append(line + "\n");
+        }
+    }
+
+    @OnClick({R.id.title_bangers_license, R.id.title_calligraphy_license,
+            R.id.title_butter_knife_license})
+    public void expandText(TextView view) {
+        switch (view.getId()) {
+            case R.id.title_bangers_license:
+                break;
+            case R.id.title_calligraphy_license:
+                break;
+            case R.id.title_butter_knife_license:
+                break;
         }
     }
 }
