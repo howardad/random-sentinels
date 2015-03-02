@@ -33,8 +33,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Random Sentinels, version 1.0.0"
+        android:text="Random Sentinels version 1.0.0"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <TextView
+        style="@style/ResultHeader"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="Open Source Licenses" />
+
+    <TextView style="@style/Divider" />
+
+    <!--add views for titles and licenses here-->
 
 </LinearLayout>
