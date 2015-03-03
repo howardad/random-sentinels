@@ -33,7 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="Random Sentinels version 1.0.0"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -44,7 +43,6 @@
 
     <TextView style="@style/Divider"/>
 
-    <!--add views for titles and licenses here-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -55,7 +53,7 @@
             android:orientation="vertical"
             android:animateLayoutChanges="true">
 
-        <TextView
+            <TextView
                 android:id="@+id/title_bangers_license"
                 style="@style/LicenseTitle"
                 android:text="@string/about_bangers"/>

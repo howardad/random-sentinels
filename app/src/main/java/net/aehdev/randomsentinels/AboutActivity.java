@@ -19,9 +19,11 @@
 
 package net.aehdev.randomsentinels;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
@@ -131,5 +133,12 @@ public class AboutActivity extends ActionBarActivity {
                 }
                 break;
         }
+    }
+
+    @OnClick(R.id.about_text)
+    public void gotoGithub() {
+        Uri rsGithub = Uri.parse("https://github.com/howardad/random-sentinels");
+        Intent intent = new Intent(Intent.ACTION_VIEW, rsGithub);
+        startActivity(intent);
     }
 }
