@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -57,15 +58,16 @@ public class AboutActivity extends ActionBarActivity {
             public void run() {
                 try {
                     parseInfo();
+                    aboutBangers.setText(Html.fromHtml(oflBangers.toString()));
+                    aboutCalligraphy.setText(Html.fromHtml(calligraphy.toString()));
+                    aboutButterKnife.setText(Html.fromHtml(butterKnife.toString()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
         }).start();
 
-        aboutBangers.setText(oflBangers);
-        aboutCalligraphy.setText(calligraphy);
-        aboutButterKnife.setText(butterKnife);
+
     }
 
     private String getVersionName() {
