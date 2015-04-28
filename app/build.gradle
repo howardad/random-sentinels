@@ -17,6 +17,8 @@
  * along with Random Sentinels. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
+
 apply plugin: 'com.android.application'
 
 def versionMajor = 1
@@ -26,7 +28,7 @@ def versionBuild = 0
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    buildToolsVersion "22.0.1"
 
     lintOptions {
         disable 'InvalidPackage'
