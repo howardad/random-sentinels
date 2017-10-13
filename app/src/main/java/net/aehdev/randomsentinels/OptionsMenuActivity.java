@@ -20,12 +20,12 @@
 package net.aehdev.randomsentinels;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public abstract class OptionsMenuActivity extends ActionBarActivity {
+public abstract class OptionsMenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

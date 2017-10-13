@@ -25,7 +25,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -40,7 +40,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 
-public class AboutActivity extends ActionBarActivity {
+public class AboutActivity extends AppCompatActivity {
 
     private StringBuilder oflBangers, calligraphy, butterKnife;
     @InjectView(R.id.about_text) TextView aboutTextView;
